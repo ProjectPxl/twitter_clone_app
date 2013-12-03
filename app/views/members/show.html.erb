@@ -1,30 +1,37 @@
-
-<div id="createRibbit" class="panel right">
-    <h1>Create a Ribbit</h1>
-    <p>
-    <form>
-        <textarea name="text" class="ribbitText"></textarea>
-        <input type="submit" value="Ribbit!">
-    </form>
-    </p>
+<% if current_member %>
+<div id="createtweet" class="panel right">
+    <h1>Create a tweet</h1>
+    <p>
+    <%= form_for @tweet do |f| %>
+        <%= f.text_area :content, class: 'tweetText' %>
+        <%= f.submit "Tweet!" %>
+    <% end %>
+    </p>
 </div>
-<div id="ribbits" class="panel left">
-    <h1>Your Ribbit Profile</h1>
-    <div class="ribbitWrapper">
-        <img class="avatar" src="<%= @member.gravatar %>">
-        <span class="name"><%= @member.name %></span> @<%= @member.username %>
-        <p>
-        XX Ribbits
-        <span class="spacing">XX Followers</span>
-        <span class="spacing">XX Following</span>
-        </p>
-    </div>
+<% end %>
+<div id="tweets" class="panel left">
+    <h1>Your tweet Profile</h1>
+    <div class="tweetWrapper">
+        <img class="avatar" src="<%= @member.gravatar %>">
+        <span class="name"><%= @member.name %></span> @<%= @member.username %>
+        <p>
+        <%= @member.tweets.size %> tweets
+        <span class="spacing">XX Followers</span>
+        <span class="spacing">XX Following</span>
+        </p>
+    </div>
 </div>
 <div class="panel left">
-    <h1>Your Ribbits</h1>
-    <div class="ribbitWrapper">
-        Ribbits coming . . .
-    </div>
+    <h1>Your tweets</h1>
+    <% @member.tweets.each do |tweet| %>
+        <div class="tweetWrapper">
+            <img class="avatar" src="<%= @member.gravatar %>">
+            <span class="name"><%= @member.name %></span> 
+            @<%= @member.username %> 
+            <span class="time"><%= time_ago_in_words(tweet.created_at) %></span>
+            <p> <%= tweet.content %> </p>
+        </div>
+    <% end %>
 </div>
 <%= link_to "sign out", destroy_member_session_path, method: :delete %>
 

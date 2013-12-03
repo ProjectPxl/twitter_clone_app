@@ -4,6 +4,8 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :tweets
+
   attr_accessor :login
 
   validates :username, uniqueness: true

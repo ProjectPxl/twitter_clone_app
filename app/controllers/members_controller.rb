@@ -8,5 +8,6 @@ class MembersController < ApplicationController
 
 	def show
     	@member = current_member
+    	@tweet = Tweet.new
   	end
 end
