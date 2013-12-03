@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20131203175945) do
 
   create_table "tweets", force: true do |t|
     t.string   "content"
-    t.integer  "user_id"
+    t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

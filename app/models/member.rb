@@ -13,7 +13,7 @@ class Member < ActiveRecord::Base
   protected
 	def self.find_for_database_authentication(conditions)
 		login = conditions.delete(:login)
-	  	where(conditions)
-	  	.where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+	  where(conditions)
+	  .where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
 	end
 end

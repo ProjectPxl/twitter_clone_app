@@ -1,7 +1,8 @@
 class Tweet < ActiveRecord::Base
 
-	default_scope order: 'createdat DESC'
-	#attr_accessible = content,user_id
+  default_scope order('created_at DESC')
+
+
 	belongs_to :member
 
 	validates :content, length: {maximum: 140}
