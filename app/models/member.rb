@@ -6,11 +6,12 @@ class Member < ActiveRecord::Base
 
   attr_accessor :login
 
+  validates :username, uniqueness: true
+
   protected
 	def self.find_for_database_authentication(conditions)
 		login = conditions.delete(:login)
 	  	where(conditions)
-	  	.where(["username = :login OR email = :login",
-	    	{:login => login}]).first
+	  	.where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
 	end
 end
