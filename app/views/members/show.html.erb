@@ -1,5 +1,6 @@
 <% if current_member %>
-<H2><%= current_member.id %></H2>
+ | <%= link_to "Index", root_path %>
+ | <%= link_to "sign out", destroy_member_session_path, method: :delete %>
 <div id="createtweet" class="panel right">
     <h1>Create a tweet</h1>
     <p>
@@ -11,7 +12,7 @@
 </div>
 <% end %>
 <div id="tweets" class="panel left">
-    <h1>Your tweet Profile</h1>
+    <h1>Profile</h1>
     <div class="tweetWrapper">
         <img class="avatar" src="<%= @member.gravatar %>">
         <span class="name"><%= @member.name %></span> @<%= @member.username %>
@@ -23,7 +24,7 @@
     </div>
 </div>
 <div class="panel left">
-    <h1>Your tweets</h1>
+    <h1>All tweets</h1>
     <% @member.tweets.each do |tweet| %>
         <div class="tweetWrapper">
             <img class="avatar" src="<%= @member.gravatar %>">
@@ -34,5 +35,5 @@
         </div>
     <% end %>
 </div>
-<%= link_to "sign out", destroy_member_session_path, method: :delete %>
+
 

@@ -6,6 +6,12 @@ class Member < ActiveRecord::Base
 
   has_many :tweets
 
+  has_many :follower_relationships, classname: "Relationship", foreing_key: "followed_id"
+  has_many :followed_relationships, classname: "Relationship", foreing_key: "follower_id"
+
+  has_many :followers, through: :follower_relationships
+  has_many :followeds, through: :followed_relationships
+
   attr_accessor :login
 
   validates :username, uniqueness: true
@@ -16,4 +22,12 @@ class Member < ActiveRecord::Base
 	  where(conditions)
 	  .where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
 	end
+
+  def following? member
+    self.followeds.include? member
+  end
+
+  def follow member
+    Relationship.create follower.id: self.id, followed_id: current_member.id
+  end
 end

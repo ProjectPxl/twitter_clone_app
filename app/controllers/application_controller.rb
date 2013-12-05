@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
 #Overwrites login_after path
 def after_sign_in_path_for(member)
-  members_show_path
+  root_path
 end
 
 #Prevent caching after logout(Back btn block)

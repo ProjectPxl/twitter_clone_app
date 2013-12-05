@@ -1,0 +1,26 @@
+
+<div id="createtweet" class="panel right">
+    <h1>Create a tweet</h1>
+    <p>
+    <%= form_for @tweet do |f| %>
+        <%= f.text_area :content, class: 'tweetText' %>
+        <%= f.submit "Tweet!" %>
+    <% end %>
+    </p>
+</div>
+
+<div class="panel left">
+    <h1>Public tweets</h1>
+    <% @tweets.each do |tweet| %>
+        <div class="tweetWrapper">
+            <a href="<%= members_show_path tweet.member %>">
+            <img class="avatar" src="<%= tweet.member.gravatar %>">
+            <span class="name"><%= tweet.member.name %></span> 
+            </a>
+            |@<%= tweet.member.username %> 
+            <span class="time"><%= time_ago_in_words(tweet.created_at) %></span>
+            <p> <%= tweet.content %> </p>
+        </div>
+    <% end %>
+</div>
+
