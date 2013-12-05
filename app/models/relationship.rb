@@ -1,6 +1,8 @@
 class Relationship < ActiveRecord::Base
 
-	belongs_to :follower, classname: "Member"
-	belongs_tp :followed, classname: "Member"
+	attr_accessible :followed_id, :follower_id
+
+	belongs_to :follower, class_name: "Member"
+	belongs_to :followed, class_name: "Member"
 
 end

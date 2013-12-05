@@ -4,10 +4,10 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :tweets
+  has_many :tweets #:dependent => :destroy
 
-  has_many :follower_relationships, classname: "Relationship", foreing_key: "followed_id"
-  has_many :followed_relationships, classname: "Relationship", foreing_key: "follower_id"
+  has_many :follower_relationships, class_name: "Relationship", foreing_key: "followed_id"
+  has_many :followed_relationships, class_name: "Relationship", foreing_key: "follower_id"
 
   has_many :followers, through: :follower_relationships
   has_many :followeds, through: :followed_relationships
@@ -28,6 +28,6 @@ class Member < ActiveRecord::Base
   end
 
   def follow member
-    Relationship.create follower.id: self.id, followed_id: current_member.id
+    Relationship.create follower_id: self.id, followed_id: current_member .id
   end
 end

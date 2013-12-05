@@ -10,7 +10,7 @@ Tests::Application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'tweets#index'
 
-     get "/members/show"
+   get "/members/show"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

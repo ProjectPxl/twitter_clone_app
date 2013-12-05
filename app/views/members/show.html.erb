@@ -18,8 +18,22 @@
         <span class="name"><%= @member.name %></span> @<%= @member.username %>
         <p>
         <%= @member.tweets.size %> tweets
-        <span class="spacing">XX Followers</span>
-        <span class="spacing">XX Following</span>
+        <span class="spacing"><%= @member.followers.count %> Followers</span>
+        <span class="spacing"><%= @member.followeds.count %> Following</span>
+
+		<% if current_member and @member != current_member %>
+	    	<% if current_member.following? @member %>
+	        <%= form_tag relationship_path, method: :delete do %>
+	            <%= submit_tag "Unfollow" %>
+	        <% end %>
+
+	    	<% else %>
+				<%= form_for @rel do %>
+	            <%= hidden_field_tag :followed_id, @member.id %>
+	            <%= submit_tag "Follow" %>
+	        	<% end %>
+    		<% end %>
+		<% end %>
         </p>
     </div>
 </div>
