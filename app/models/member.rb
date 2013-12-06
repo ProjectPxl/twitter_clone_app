@@ -4,7 +4,7 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :tweets #:dependent => :destroy
+  has_many :tweets, dependent: :destroy
 
   has_many :follower_relationships, class_name: "Relationship", foreing_key: "followed_id"
   has_many :followed_relationships, class_name: "Relationship", foreing_key: "follower_id"
@@ -17,10 +17,12 @@ class Member < ActiveRecord::Base
   validates :username, uniqueness: true
 
   protected
+
 	def self.find_for_database_authentication(conditions)
 		login = conditions.delete(:login)
 	  where(conditions)
-	  .where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+	  .where(["lower(username) = :value OR lower(email) = :value",
+    { :value => login.downcase }]).first
 	end
 
   def following? member

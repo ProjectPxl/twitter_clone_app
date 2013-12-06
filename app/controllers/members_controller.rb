@@ -11,6 +11,6 @@ class MembersController < ApplicationController
     	@tweet = Tweet.new
 
     	@rel = Relationship.where(follower_id: current_member.id,
-    		followed_id: @member.id).first_or_initialize if current_member
+    	followed_id: @member.id).first_or_initialize if current_member
   	end
 end

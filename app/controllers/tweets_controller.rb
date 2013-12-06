@@ -20,6 +20,7 @@ before_filter :authenticate_member!
 	end
 
 	private
+	
 	def tweet_params
 		params.require(:tweet).permit(:content, :member_id)
 	end

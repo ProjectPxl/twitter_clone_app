@@ -1,7 +1,9 @@
 <% if current_member %>
  | <%= link_to "Index", root_path %>
  | <%= link_to "sign out", destroy_member_session_path, method: :delete %>
+
 <div id="createtweet" class="panel right">
+
     <h1>Create a tweet</h1>
     <p>
     <%= form_for @tweet do |f| %>
@@ -11,6 +13,7 @@
     </p>
 </div>
 <% end %>
+
 <div id="tweets" class="panel left">
     <h1>Profile</h1>
     <div class="tweetWrapper">
@@ -37,6 +40,7 @@
         </p>
     </div>
 </div>
+
 <div class="panel left">
     <h1>All tweets</h1>
     <% @member.tweets.each do |tweet| %>
