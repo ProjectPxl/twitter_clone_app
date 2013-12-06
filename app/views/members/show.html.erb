@@ -6,10 +6,7 @@
 
     <h1>Create a tweet</h1>
     <p>
-    <%= form_for @tweet do |f| %>
-        <%= f.text_area :content, class: 'tweetText' %>
-        <%= f.submit "Tweet!" %>
-    <% end %>
+    <%= render 'partials/new_tweet'
     </p>
 </div>
 <% end %>
